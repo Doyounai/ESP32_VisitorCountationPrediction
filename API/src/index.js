@@ -1,6 +1,7 @@
 // src/index.js
 const express = require("express");
 const dotenv = require("dotenv");
+const cors = require("cors");
 const mysql = require("mysql2");
 const bodyParser = require("body-parser");
 
@@ -22,6 +23,10 @@ const pool = mysql.createPool({
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cors({
+  credentials: true,
+}));
+
 app.use((req, res, next) => {
   req.pool = pool;
   next();
